@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Script-Type" content="text/javascript; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>   
+        <style type="text/css">
+            .backg{
+            position: relative;
+            background: #000 url("/static/images/rating.jpg") 
+            center center;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            overflow: hidden;
+            }
+        </style>
+        <title>
+            Select Questions
+        </title>
+    </head>
+    <body>
+    {% if error %}
+      <p align="center"><strong>Error:</strong> {{ error }}
+    {% endif %}
+        <div class="backg">
+        <div class="container">
+            <div class='col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 '>
+                <div class="jumbotron">
+                    <h1 style="text-align: center; color: #4dff4d;" >Hello {{profname}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+        <form action="https://192.168.43.57/faculty/home" style="vertical-align:middle" method="GET">
+        <span>
+        <button class="btn btn-info" type="submit" name="back">Go Back to Home 
+        </button>
+        </span>
+        </form>
+        <br>
+        </div>
+        <h1 style="text-align: center">Objective Questions (Select 10 questions)</h1>
+        <form action="https://192.168.43.57/faculty/home/form/make" method="POST" name="checks">
+            <div class="container">
+                <div clas="row">
+                    <div class="text-center">
+                        <div class='col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2'>
+                            <div class="form">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading"> Make Form</div>
+                                    <div class="panel-body">
+                                        <h2> Select Course </h2>
+                                        <select name="select1" class="selectpicker">
+                                            {% for i in courses %}
+                                            <option value="{{ i.courseid}}" name="{{ i.courseid}}"> {{ i.courseid}} </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <button type="submit" name="Select"> Select </button> -->
+            <!-- </form> -->
+            <div class="container">
+                <div clas="row">
+                    <div class="text-center">
+                        <div class='col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2'>
+                            <table class="table table-striped table-bordered ">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center; text-decoration:underline ; ">Q.No</th>
+                                        <th style="text-align: center; text-decoration:underline ; ">Select</th>
+                                        <th style="text-align: center; text-decoration:underline ; ">Questions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in q %}
+                                    <tr>
+                                        <td> {{ i.qno}} </td>
+                                        <td align="center"> <input type="checkbox" name="checks" id="{{ i.question_t2}}" value="{{ i.question_t2}}"><label for="{{ i.question_t2}}"></label> </td>
+                                        <td align="center">{{i.question_t2}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <h1 style="text-align: center">Subjective Questions</h1>
+            <div class="container">
+                <div clas="row">
+                    <div class="text-center">
+                        <div class='col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2'>
+                            <table class="table table-striped table-bordered ">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center; text-decoration:underline ; ">Q.No</th>
+                                        <th style="text-align: center; text-decoration:underline ; ">Select</th>
+                                        <th style="text-align: center; text-decoration:underline ; ">Questions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in q2 %}
+                                    <tr>
+                                        <td> {{ i.qno}} </td>
+                                        <td align="center"> <input type="checkbox" name="checks2" id="{{ i.question_t1}}" value="{{ i.question_t1}}"><label for="{{ i.question_t1}}"></label> </td>
+                                        <td align="center">{{i.question_t1}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <button id="submit" name="Select" type="submit">Submit Form</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+    </body>
+</html>
+

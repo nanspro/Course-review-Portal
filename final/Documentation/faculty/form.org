@@ -1,0 +1,40 @@
+#+TITLE: Make a Form.
+#+AUTHOR: Yudhik,Rahul,Pratik
+#+SETUPFILE: ./org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction...
+  Form making page for professor for any of his own course.
+
+* Specialities...
+** Properly Styled.
+   Well Ordered Bootstraping is done to the page.
+   All files for =CSS= =Bootstrap= =images= are properly organised in static folder
+* Flow of page...
+** Select Course
+   Professor can select amongst his own courses,of which course he wantsto build an form.
+
+** Select Questions
+   Professor basically selects 10 objective questions among given 20 questions,and some subjective questions among 4 subjective questions.
+#+BEGIN_SRC python
+@mod_form.route('',methods=['POST','GET'])
+def open():
+	courses1= Course.query.filter(Course.profname==profname).all()
+	return render_template("questions/table.html",q=q,profname=profname,courses=courses1)
+#+END_SRC
+
+When professor submits his response he makes an api call to '/make' where we merges all his responses in string and add it to table 'form'
+#+BEGIN_SRC python
+@mod_form.route('/make',methods=['POST','GET'])
+def mac():
+	stri=""
+		for i in test:
+			if len(stri) == 0:
+				stri = i
+			else :
+				stri = stri +','+i	
+		best = stri
+	u = Form(courseId,best)
+#+END_SRC

@@ -1,0 +1,53 @@
+#+TITLE: Course Review Portal @ IIIT-H Description.
+#+AUTHOR: Yudhik,Rahul,Pratik
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  The challenge is to build a web application from the ground up using formal
+  methods ensuring safety and flexibility in evolution. We have buit the Course Review Portal.
+  The Design and Data model will be explained in a properly linked sequence of <name>.org files
+  to the user.
+
+* In Index.org
+  This file is dedicated to explain all the  covered points according to web app short course criterias.
+  The principle that is followed while building this application is modularity.
+  It is thought that the biggest gain from modularity is safety and ease of
+  evolution in incorporating newer requirements.
+
+* Goal
+  The Goal of this documentation is to walk you through an end-to-end requirements
+  specification, design, development and deployment of the  web application buit in our project.
+
+* Parts of our Application
+** Diagram Representation
+   #+CAPTION: Weight space
+   #+ATTR_HTML: :width 70%
+   [[./Flowlinks.png][Flowchart]]
+  
+* Specialities
+
+** Question Database
+1) =db.py= is made seperately for avoiding errors due to (unique=true) and questions data base.
+   The professor is allowed to select objective and subjective questions from a given list of questions which will make the 
+   form of the course.
+2) He is also given choice to update the created form of the course
+
+* Links to various Components of our Model
+
+  * [[./users.org][User Directory Applications]]
+
+  * [[./faculty/home.org][Faculty Home]]
+
+  * [[./student/home.org][Student Home]]
+
+  * [[./signup.org][Sign(in/up) for various users]]
+ 
+  * [[./users.org][Users]]
+
+  * [[./faculty/form.org][Creating a form]]
+  
+  * [[./faculty/review.org][View Submitted forms]]
+

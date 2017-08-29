@@ -1,0 +1,82 @@
+#+TITLE: Professor's home.
+#+AUTHOR: Rahul,Yudhik,Pratik
+#+SETUPFILE: ./org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction...
+  Home page of professor after he successfully logs in.This page is basically giving professor all the buttons which 
+  redirects him to another pages.Also this page shows professor's rating and his all course's individual rating.
+
+* Specialities...
+** Properly Styled.
+   Well Ordered Bootstraping is done to the page.
+   All files for =CSS= =Bootstrap= =images= are properly organised in static folder
+* Flow of page...
+** Add Course
+   Professor can add courses for him,professor clicks on 'edit' button which redirects to '/courses'.
+
+** See Responses
+   Professor clicks on see responses and it redirects professor to '/rating'. 
+
+** View all Courses
+   Student can view all the courses of all professors.
+   Dynamically a table will appear consisting of course id,prof name,course name.
+#+BEGIN_SRC python
+  @mod_students.route('/home',methods=['POST','GET'])
+  def res():
+          courses=Course.query.all()
+#+END_SRC
+
+#+BEGIN_SRC html
+  {
+  <table class="table table-striped table-bordered " hidden="hidden" id="cc">
+                              <thead>
+                                 <tr>
+                                      <th style="text-align: center; text-decoration:underline ; ">Course Name</th>
+                                      <th style="text-align: center; text-decoration:underline ; ">Course Id</th>
+                                      <th style="text-align: center; text-decoration:underline ; ">Professor Name</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  {% for i in courses %}
+                          <tr>
+                                  <td> {{ i.name}} </td>
+                                  <td> {{ i.courseid}} </td>
+                                  <td> {{ i.profname}} </td>
+                          </tr>
+                          {% endfor %}
+                              </tbody>
+                          </table>
+  }
+#+END_SRC
+
+** Go To Form Making page
+   Professor can click on 'Go to form making page' button and it redirects him to '/form'.
+
+
+** Graphs
+   Professor can view it's overall rating which is basically sum of individual course rating divided by his total no of courses.
+   see else statement if professor is sucessfully logged in we find 'prof_courses' courses of that professor,if this is not null then we iterate in this
+   we define an 'bar' graph for individual course rating titled 'profcourserating'
+   z is course id of that course which is currently iterating in loop.
+   y is all the 'displayform' table rows which have that courseid.
+   resp is an empty list.
+   if y is not empty then it means atleast one student reviews an form(response is not empty).
+   then we iterate in rows of 'displayform' and find ans which contains ans to professor's question in format like '123523531' etc.
+   then we break this string by comma i.e: 1,2,3,5,2,3......
+   then we iterate each character of this and hence subtract 48 from that and find each integeral response.
+   then we append those integers in repo so that we can show professors that responses later.
+   we add these integers which are ten in number and divide it by 5 so that we get response rating out of 10
+   then we add all these response ratings and divide them by no of responses for that course hence get course rating.
+   we add each course rating to our 'bar' graph.
+   similarly adding all course rating and divide them by no of course gave us professor rating.
+   finally we add professor rating to 'pie' graph.
+   
+#+BEGIN_SRC python
+  @mod_faculty.route('/home',methods=['POST','GET'])
+  def login():    
+          return render_template('professors/home.html',name=name,courses=courses,rating=overallrating,graph_data=graph_data,graph_data1=graph_data1)
+
+#+END_SRC

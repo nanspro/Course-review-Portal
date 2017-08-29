@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+	<body>
+		<table border=1>
+			{% for i in courses %}
+			<tr>
+				<th> {{ i.name}} </th>
+				<th> {{ i.courseid}} </th>
+<th> {{ i.profname }} </th>
+			</tr>
+			{% endfor %}
+		</table>
+	</body>
+</html>

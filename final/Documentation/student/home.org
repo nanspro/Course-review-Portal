@@ -1,0 +1,62 @@
+#+TITLE: Student's home.
+#+AUTHOR: Rahul,Yudhik,Pratik
+#+SETUPFILE: ./org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction...
+  Home page of student after he successfully logs in..
+
+* Specialities...
+** Properly Styled.
+   Well Ordered Bootstraping is done to the page.
+   All files for =CSS= =Bootstrap= =images= are properly organised in static folder
+* Flow of page...
+** Register
+   Student can register itself to courses of any professor.
+   by clicking on register button it redirects student to '/form/courses' page.
+
+** Review
+   Student can review courses which are registered to him,by selecting the course to be reviewed
+   and clicking on button it redirects to '/form' page. student will get an dropdown of all his courses from 'response' table
+   of database. 
+#+BEGIN_SRC python
+@mod_response.route('/courses', methods=['POST','GET'])
+def get_all_courses():
+
+	courses3=Response.query.filter(Response.studname==studname).all()
+	return render_template('students/courses.html',courses=courses,courses3=courses3,studname=studname)
+#END_SRC
+
+** View all Courses
+   Student can view all the courses of all professors.
+   Dynamically a table will appear consisting of course id,prof name,course name.
+#+BEGIN_SRC python
+@mod_students.route('/home',methods=['POST','GET'])
+def res():
+	courses=Course.query.all()
+#+END_SRC
+
+#+BEGIN_SRC html
+{
+<table class="table table-striped table-bordered " hidden="hidden" id="cc">
+                            <thead>
+                               <tr>
+                                    <th style="text-align: center; text-decoration:underline ; ">Course Name</th>
+                                    <th style="text-align: center; text-decoration:underline ; ">Course Id</th>
+                                    <th style="text-align: center; text-decoration:underline ; ">Professor Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in courses %}
+			<tr>
+				<td> {{ i.name}} </td>
+				<td> {{ i.courseid}} </td>
+				<td> {{ i.profname}} </td>
+			</tr>
+			{% endfor %}
+                            </tbody>
+                        </table>
+}
+#+END_SRC

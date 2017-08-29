@@ -1,0 +1,76 @@
+#+TITLE: Review forms.
+#+AUTHOR: Rahul,Yudhik,Pratik
+#+SETUPFILE: ./org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction...
+  Professor can see reviews(of his courses) of students in table and graphical form. 
+
+* Specialities...
+** Properly Styled.
+   Well Ordered Bootstraping is done to the page.
+   All files for =CSS= =Bootstrap= =images= are properly organised in static folder
+* Flow of page...
+** Select Course/Response
+   To see all responses of a course,prof has to select course form an dropdown then after clicking on submit,it redirects to same page with an graph
+   consisting of all the responses of that course.
+#+BEGIN_SRC python
+@mod_rating.route('/faculty/home/rating', methods=['POST','GET'])
+def get_all_faculty():
+#END_SRC
+   To see an individual response professor first select course form dropdown submit that,then he will get all responses of that course in the below dropdown
+   then professor first again select course from dropdown(which is changed to 1st choice in dropdown default) and then he select any response after that he submits
+   hence he gets individual reponse graph also.
+   
+   In the choose response dropdown when we chooses response we have that response subj answer,then we filter that answer (we are assuming two students can't fill exactly same subj answers)
+   then we get all objective responses and then we use them to put in table.
+#+BEGIN_SRC html
+{
+<select name="select2" class="selectpicker" data-live-search="true" >
+                                            {% for i in range(0,(responses)|length) %}
+                                            <option value="{{responses[i].subj}}" name="{{responses[i].subj}}" > {{i+1}} </option>
+                                            {% endfor %}
+                                        </select>
+}
+#+END_SRC
+
+#+BEGIN_SRC  python
+
+#+END_SRC
+** Score Table
+  When professor selected any course then submit,all the questions of that course(form of that course made by prof) will appear in a table.
+  Then when prof choose response that table will show (for each question,score out of 5 will appear in table) based on student's response to that form.
+  also for Subjectve questions,answers by students will appear on that.   
+#+BEGIN_SRC html
+{
+<table class="table table-striped table-bordered ">
+                            <thead>
+                               <tr>
+                                    <th style="text-align: center; text-decoration:underline ; ">Question</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in questions %}
+                                <tr>
+                                    <td > {{i}} </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class='col-xs-2 col-md-2'>
+                        <table class="table table-striped table-bordered ">
+                            <tr>
+                                <th style="text-align: center; text-decoration:underline ;"  >score(out of 5)</th>
+                            </tr>
+                            {% for j in selectresponse %}
+                            <tr>
+                                <td> {{j}} </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+}
+#END_SRC
+

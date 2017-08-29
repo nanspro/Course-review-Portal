@@ -1,0 +1,156 @@
+
+
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <title>Faculty Home</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Script-Type" content="text/javascript; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>   
+        <link rel="stylesheet" href="/static/css/index.css">
+        <style type="text/css">
+            .backg{
+            position: relative;
+            background: #000 url("/static/images/rating.jpg") 
+            center center;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            overflow: scroll;
+            }
+            /*#qq{
+            float:left;
+            }
+            #ww{
+            float:right;
+            }
+            #ee{
+            float:left;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="backg">
+            <div class="container">
+                <div class='col-lg-12 col-lg-offset-1 col-md-12 col-md-offset-1'>
+                    <div class="jumbotron">
+                        <h1 style="text-align: center; color: #4dff4d;" >Welcome {{name}}</h1>
+                        <h2 style="text-align: center; color: #4dff4d;" >To Course Review Portal @IIITH</h2>
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
+            <div class="container">
+            <div clas="row">
+                    <div class="text-center">
+                        <div class='col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2'>
+                            <div class="form">
+                                <div class="panel panel-info">
+                            
+             <div class="panel-body">
+            <form action="https://192.168.43.57/faculty/" method="GET">
+            <button type="submit" class="btn btn-primary btn-lg btn-block" name="mybutton[]" onclick=" ">Logout</button>
+            </form>
+</div></div></div></div></div>
+                {% if error %}
+                    <p align="center"><strong>Error:</strong> {{ error }}
+                {% endif %}
+                <div clas="row">
+                    <div class="text-center">
+                        <div class='col-lg-8 col-lg-offset-2 col-md-offset-2 col-md-8'>
+                            <div class="form">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">Make a Form </div>
+                                    <div class="panel-body">
+                                        <form action="https://192.168.43.57/faculty/home/form" method="POST">
+                                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="mybutton[]" onclick=" "> Go to  form making page </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <div clas="row">
+                    <div class="text-center">
+                        <div class='col-lg-8 col-lg-offset-2 col-md-offset-2 col-md-8'>
+                            <div class="form">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading"> See Responses of Students </div>
+                                    <div class="panel-body">
+                                        <form action="https://192.168.43.57/faculty/home/rating" method="POST">
+                                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="mybutton[]" onclick=" ">Click here </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div clas="row">
+                    <div class="text-center">
+                        <div class='col-lg-8 col-lg-offset-2 col-md-offset-2 col-md-8'>
+                            <div class="form">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading"> Courses </div>
+                                    <div class="panel-body">
+                                        <form action="https://192.168.43.57/faculty/home/courses" method="POST">
+                                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="mybutton[]" onclick=" "> Edit </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <div class="container" id="ee">
+                <div clas="row">
+                    <div class="text-center">
+                        <div class='col-lg-8 col-lg-offset-2 col-md-offset-2 col-md-8'>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" name="mybutton[]" onclick="$('#cc').toggle('fast')">View All Courses of this semester </button>
+                            <table class="table table-striped table-bordered " hidden="hidden" id="cc">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center; text-decoration:underline ; ">Course Name</th>
+                                        <th style="text-align: center; text-decoration:underline ; ">Course Id</th>
+                                        <th style="text-align: center; text-decoration:underline ; ">Professor Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in courses %}
+                                    <tr>
+                                        <td> {{ i.name}} </td>
+                                        <td> {{ i.courseid}} </td>
+                                        <td> {{ i.profname}} </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/><br/><br/><br/><br/><br/>
+            <div class="container" id="ww" >
+                {% block body %}
+                <body class="body">
+                    <div class="container" align="center">
+                        <embed  type="image/svg+xml" src={{graph_data|safe}} style='max-width:800px'/>
+                    </div>
+                    <br/><br/>
+                    <div class="container" align="center">
+                        <embed type="image/svg+xml" src={{graph_data1|safe}} style='max-width:800px'/>
+                    </div>
+    </body>
+    {% endblock %}
+    </div> 
+    </div>
+    </body>
+</html>
+

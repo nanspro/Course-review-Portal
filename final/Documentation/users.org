@@ -1,0 +1,75 @@
+#+TITLE: Course Review Portal @ IIIT-H Description.
+#+AUTHOR: Yudhik,Pratik,Rahul
+#+SETUPFILE: ./org-templates/level-1.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Application:  A web-based directory of users
+
+ The application is a simple directory of users and related
+ information like 
+ (name and email) for a faculty and 
+ (name roll number and email) for a Student
+ *The faculty has been deployed =admin-user= privilages*. 
+ 
+  All interaction is via a login session.  That is, users need
+  to log in before they can perform any operation.  Which
+  operation may be executed on what entity depends on both
+  that entity and the user who is logged in. 
+ 
+   Once a user is logged in, the system allows for the following /operations/
+
+
+* Types of Roles
+** Operations of Faculty
+  1. Viewing all the Courses of the semester
+  2. Creating and removing his own courses
+  3. Genreating forms for Various courses also updating them.
+  4. Viewing all reviews from the students.
+
+** Operations of Student
+  1. Viewing all the Courses of the semester
+  2. Adding and removing his own courses 
+     (From a list of Courses created by faculty like deploying *admin privilages to the faculty*
+  3. Reviewing forms for courses Created by respective faculty.
+  4. Updating Responses Submitted
+
+  All interaction is via a login session.  That is, users need
+  to log in before they can perform any operation.  Which
+  operation may be executed on what entity depends on both
+  that entity and the user who is logged in.
+
+* Users
+
+** User Identification
+   Each user has an email address (string that corresponds to a
+   valid email addr). 
+** Uniqueness of a User
+   No two users can have same E-mail Address.Trying to register with already
+   registered e-mail address throws an error.
+** Role of a User
+   Each user has one or more role, and by default when a user is created, the
+   role that is associated with the newly created user is =user=
+** Constraints
+   A user can have more than one session, but no two session of a same user can
+   have the same role. i.e. each session of a user is mapped to a different role.
+
+* Interaction with the system and privileges
+|---------------------------------------+-------+--------------------------+
+| Operation                             | Actor | Permission               |                     
+|---------------------------------------+-------+--------------------------+                     
+| Create or delete a course             | =a=   | =a='s role is =faculty=  |                     
+|---------------------------------------+-------+--------------------------+                     
+| Create forms and update them          | =a=   | =a='s role is =faculty=  |                                         
+|---------------------------------------+-------+--------------------------+                     
+| Review Forms and edit their reviews   | =b=   | =b='s role is =student=  |                     
+| for =a's= course                      |       | =a= is  =faculty=        |                     
+|---------------------------------------+-------+--------------------------+                     
+| View all reviews of his courses       | =a=   | =a='s role is =faculty=  |                     
+|                                       |       |                          |                     
+|---------------------------------------+-------+--------------------------+                     
+| View the list of Courses in  semester | =a b= | always allowed           |                     
+|                                       |       | for both faculty and     |                      
+|                                       |       | students                 |                     
+|---------------------------------------+-------+--------------------------+                     

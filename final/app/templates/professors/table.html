@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+	<body>
+		<table border=1>
+			{% for i in faculty %}
+			<tr>
+				<th> {{ i.name}} </th>
+				
+				<td> {{ i.email }} </td>
+				
+			</tr>
+			{% endfor %}
+		</table>
+	</body>
+</html>

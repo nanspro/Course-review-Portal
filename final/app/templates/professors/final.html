@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>After Submission</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Script-Type" content="text/javascript; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>   
+<!--         <link rel="stylesheet" href="/static/css/index.css">
+ -->        <style type="text/css">
+            .backg{
+            /*position: relative;
+            background: #000 url("/static/images/rating.jpg") 
+            center center;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            overflow: hidden;*/
+            background: #000 url("/static/images/rating.jpg") no-repeat;
+            height: 100%;
+            background-size: cover;
+            width:auto;
+            }
+        </style>	
+	</head>
+<body>
+<div class="backg">
+<div class="container" align="center">
+<div clas="row">
+                <div class="text-center">
+                {% if error %}
+                    <p align="center"><strong>Update:</strong> {{ error }}
+                {% endif %}
+                    <div class='col-md-offset-2 col-xs-offset-2 col-xs-6 col-md-6'>
+           <button type="submit" class="btn btn-primary btn-lg btn-block" name="mybutton[]" onclick="$('#questions').toggle('fast')">The filled form for {{course}} is as follows </button>
+                  
+                        <table class="table table-striped table-bordered " hidden="hidden" id="questions">
+                            <thead>
+                               <tr>
+                                    <th style="text-align: center; text-decoration:underline ; ">Questions in the Form</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in test %}
+			<tr>
+				<td align="left"> {{i}} </td>
+			</tr>
+			{% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/><br/><br/><br/><br/><br/>
+        <div class="container">
+<div clas="row">
+                    <div class="text-center">
+                        <div class='col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2'>
+                            <div class="form">
+                                <div class="panel panel-info">
+                            
+             <div class="panel-body">
+            <form action="https://192.168.43.57/faculty/home/form" method="POST">
+			<button type="submit" class="btn btn-primary btn-lg btn-block" name="mybutton[]" onclick=" ">Make another form</button>
+			</form>
+</div></div></div></div></div>
+</div>
+
+
+ <div clas="row">
+                    <div class="text-center">
+                        <div class='col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2'>
+                            <div class="form">
+                                <div class="panel panel-info">
+                            
+             <div class="panel-body">
+            <form action="https://192.168.43.57/faculty/home" method="GET">
+			<button type="submit" class="btn btn-primary btn-lg btn-block" name="mybutton[]" onclick=" ">Back To Home</button>
+			</form>
+</div></div></div></div></div>
+</div>
+</div>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+</div>
+</body>
+</html>

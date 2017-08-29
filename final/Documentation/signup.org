@@ -1,0 +1,61 @@
+#+TITLE: Sign (in/up) Pages.
+#+AUTHOR: Yudhik,Pratik,Rahul
+#+SETUPFILE: ./org-templates/level-1.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  Sign up pages for faculty and student open ater clicking respective buttons on the main page.
+
+* Specialities
+** Properly Styled.
+  Well Ordered Bootstraping is done to the pages for both type of users.
+  All files for =CSS= =Bootstrap= =images= are properly organised in static folder.
+
+** Proper Constraints.
+*** No two users can have same E-mail ID.
+*** Username must contain alphabets and its length should be between 4 to 25 words.
+*** Roll-no for student must contain Integers between 4 to 8 digits.
+*** E-mail address must contain '@' and its length should be between 4 to 35 words.
+*** Violation of any field leads to different errors helping to understand where mistake has occured.
+
+** SMTP Mailing system.
+  On registration of a user they recieve a mail from =course review portal= confirming their registration on their rgistered email-id.
+  
+** CSRF Enabled 
+   Both Signin forms for faculty and students have =CSRF VALIDATIONS= enabled.
+   These forms are made using wtforms in flask 
+#+BEGIN_SRC python
+{
+    from flask_wtf import Form
+   from wtforms import TextField
+   class ContactForm(Form):
+   name = TextField("Name Of Student")   
+}
+#+END_SRC
+In addition to the ‘name’ field, a hidden field for CSRF token is created automatically. This is to prevent Cross Site Request Forgery attack.
+When rendered, this will result into an equivalent HTML script as shown below. 
+#+BEGIN_SRC html
+{
+<input id = "csrf_token" name = "csrf_token" type = "hidden" />
+<label for = "name">Name Of Student</label><br>
+<input id = "name" name = "name" type = "text" value = "" />  
+}
+#+END_SRC
+
+Reference of above claim:
+* [[https://www.tutorialspoint.com/flask/flask_wtf.htm][Tutorials point Flask WTForms]]
+
+** Both Sign(in/up) are managed in same url
+   This minimizes url shifting giving more order to the application structure.
+** On INcorrect login.
+   User is sent back to signup part for registering if he has not registered else he can again try to put e-mail id
+   and password if already registered.
+** On Correct login
+   *Users are directed to respective HOME Pages.Equiped with functionaities assigned to that user Class* 
+
+* Links to various Components of our Model
+  * [[./students/home.org][Student Home]]
+
+  * [[./faculty/home.org][Faculty Home]]
